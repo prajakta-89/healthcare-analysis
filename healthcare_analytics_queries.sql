@@ -4488,8 +4488,8 @@ select * from medications;
 select * from patients;
 select * from appointments;
 
-/*Exam Questions
-Q1 | Marks: 3
+/*Questions
+Q1 
 List the first 10 patients from the city ‘Bengaluru’, showing patient_id, full name, city, and blood group.
 */
 -- SOLUTION ...
@@ -4503,7 +4503,7 @@ WHERE city = 'Bengaluru'
 LIMIT 10;
 
 
-/*Q2  | Marks: 3
+/*Q2
 Display all doctors who are currently ‘Active’ and have more than 10 years of experience.
 */
 -- SOLUTION ...
@@ -4518,7 +4518,7 @@ WHERE status = 'Active'
   AND experience_years > 10;
 
 
-/*Q3 | Marks: 5
+/*Q3
 Find the total number of patients treated by each doctor.
 Display doctor_id, doctor name, and patient_count.
 */
@@ -4533,7 +4533,7 @@ JOIN appointments a
 GROUP BY d.doctor_id, d.first_name, d.last_name;
 
 
-/*Q4                                                                                                                                    Marks: 4
+/*Q4                                                                                                                                    
 For each payment mode, find how many bills are ‘Paid’ and their total net_amount.
 */
 -- SOLUTION ...
@@ -4545,7 +4545,7 @@ FROM bills
 WHERE payment_status = 'Paid'
 GROUP BY payment_mode;
 
-/*Q5                                                                                                                                     Marks: 5
+/*Q5                                                                                                                                     
 Show top 5 departments with the highest total revenue generated from patient bills.
 */
 -- SOLUTION ...
@@ -4563,7 +4563,7 @@ GROUP BY dep.department_id, dep.department_name
 ORDER BY total_revenue DESC
 LIMIT 5;
 
-/*Q6                                                                                                                                       Marks: 4
+/*Q6                                                                                                                                       
 Create a view named “vw_doctor_revenue” that displays each doctor’s total revenue collected from paid bills.
 The view should include:
 ●	Doctor ID
@@ -4591,7 +4591,7 @@ SELECT *
 FROM vw_doctor_revenue
 WHERE total_revenue > 1000;
 
-/*Q7                                                                                                                                                    Marks: 5
+/*Q7                                                                                                                                                    
 Identify the top 5 patients who have paid the highest total amount across all their bills.
 Show patient name and total amount paid.
 */
@@ -4608,7 +4608,7 @@ ORDER BY total_amount_paid DESC
 LIMIT 5;
 
 
-/*Q8                                                                                                                                                     Marks: 4
+/*Q8                                                                                                                                                     
 Show a list of medications prescribed by doctors belonging to departments whose name contains ‘ology’
  (like Cardiology, Neurology, etc.).
  */
@@ -4629,7 +4629,7 @@ JOIN departments dep
 WHERE dep.department_name LIKE '%ology%';
 
 
-/*Q9                                                                                                                                                     Marks: 5
+/*Q9                                                                                                                                                     
 Using a window function, list the top 3 earning patients per city based on total amount paid (net_amount from bills).
 Output should include:
 ●	City
@@ -4663,7 +4663,7 @@ FROM (
 WHERE city_rank <= 3
 ORDER BY city, city_rank;
 
-/*Q10                                                                                                                                              Marks: 4
+/*Q10                                                                                                                                              
 Increase the discount by 5% for all bills where payment_status = ‘Pending’.
 Before updating:
 1.	Check how many such records exist.
@@ -4690,7 +4690,7 @@ FROM bills
 WHERE payment_status = 'Pending'
 LIMIT 5;
 
-/*Q11                                                                                                                                                  Marks: 5
+/*Q11                                                                                                                                                  
 Part A – CTE:
 Write a CTE (Common Table Expression) to find doctors who have handled more than 8 appointments.
 Display doctor_id, doctor_name, and appointment_count.
@@ -4730,7 +4730,7 @@ END$$
 DELIMITER ;
 
 
-/*Q12 (DDL Task)                                                                                                                         Marks: 3
+/*Q12 (DDL Task)                                                                                                                         
 Create a new database named ‘Hospital_Training_DB’ and inside it create two tables:
 test_doctors and test_patients.
 Requirements:
