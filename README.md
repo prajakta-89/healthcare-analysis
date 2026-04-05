@@ -72,3 +72,18 @@ The dataset consists of multiple tables:
 ### 1. Total Patients
 ```sql
 SELECT COUNT(*) AS total_patients FROM patients;
+```
+###Questions
+Q1 
+List the first 10 patients from the city ‘Bengaluru’, showing patient_id, full name, city, and blood group.
+-- SOLUTION ...
+
+```sql
+SELECT
+    patient_id,
+    CONCAT(first_name, ' ', last_name) AS full_name,
+    city,
+    blood_group
+FROM patients
+WHERE city = 'Bengaluru'
+LIMIT 10;
