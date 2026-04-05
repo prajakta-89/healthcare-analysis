@@ -84,3 +84,4 @@ SELECT
 FROM patients
 WHERE city = 'Bengaluru'
 LIMIT 10;
+
