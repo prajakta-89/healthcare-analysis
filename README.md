@@ -99,7 +99,7 @@ WHERE status = 'Active'
 ```
 ### 4. Find the total number of patients treated by each doctor.
 Display doctor_id, doctor name, and patient_count.
-```
+```sql
 SELECT
     d.doctor_id,
     CONCAT(d.first_name, ' ', d.last_name) AS doctor_name,
@@ -108,4 +108,56 @@ FROM doctors d
 JOIN appointments a
     ON d.doctor_id = a.doctor_id
 GROUP BY d.doctor_id, d.first_name, d.last_name;
+```
+### 5.For each payment mode, find how many bills are ‘Paid’ and their total net_amount.
+```sql
+SELECT
+    payment_mode,
+    COUNT(*) AS paid_bill_count,
+    SUM(net_amount) AS total_net_amount
+FROM bills
+WHERE payment_status = 'Paid'
+GROUP BY payment_mode;
+```
+### 6. Show top 5 departments with the highest total revenue generated from patient bills.
+```sql
+SELECT
+    dep.department_id,
+    dep.department_name,
+    SUM(b.net_amount) AS total_revenue
+FROM departments dep
+JOIN doctors d
+    ON dep.department_id = d.department_id
+JOIN bills b
+    ON d.doctor_id = b.doctor_id
+WHERE b.payment_status = 'Paid'
+GROUP BY dep.department_id, dep.department_name
+ORDER BY total_revenue DESC
+LIMIT 5;
+```
+### 7. Create a view named “vw_doctor_revenue” that displays each doctor’s total revenue collected from paid bills.
+The view should include:
+●	Doctor ID
+●	Doctor Full Name
+●	Total Revenue (sum of net_amount from paid bills)
+Then write a query to:
+1.	Select all columns from vw_doctor_revenue.
+2.	Display only those doctors whose total revenue exceeds ₹1000
+```sql
+CREATE VIEW vw_doctor_revenue AS
+SELECT
+    d.doctor_id,
+    CONCAT(d.first_name, ' ', d.last_name) AS doctor_full_name,
+    SUM(b.net_amount) AS total_revenue
+FROM doctors d
+JOIN bills b
+    ON d.doctor_id = b.doctor_id
+WHERE b.payment_status = 'Paid'
+GROUP BY d.doctor_id, d.first_name, d.last_name;
+
+SELECT * FROM vw_doctor_revenue;
+
+SELECT *
+FROM vw_doctor_revenue
+WHERE total_revenue > 1000;
 ```
