@@ -84,4 +84,28 @@ SELECT
 FROM patients
 WHERE city = 'Bengaluru'
 LIMIT 10;
-
+```
+### 3. Display all doctors who are currently ‘Active’ and have more than 10 years of experience.
+```sql
+SELECT
+    doctor_id,
+    first_name,
+    last_name,
+    specialization,
+    experience_years
+FROM doctors
+WHERE status = 'Active'
+  AND experience_years > 10;
+```
+### 4. Find the total number of patients treated by each doctor.
+Display doctor_id, doctor name, and patient_count.
+```
+SELECT
+    d.doctor_id,
+    CONCAT(d.first_name, ' ', d.last_name) AS doctor_name,
+    COUNT(DISTINCT a.patient_id) AS patient_count
+FROM doctors d
+JOIN appointments a
+    ON d.doctor_id = a.doctor_id
+GROUP BY d.doctor_id, d.first_name, d.last_name;
+```
